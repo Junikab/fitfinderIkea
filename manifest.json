@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "FitFinder IKEA",
+    "version": "1.0",
+    "description": "Filter IKEA furniture by specific measurements",
+    "permissions": ["activeTab", "storage"],
+    "action": {
+        "default_popup": "src/popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://www.ikea.com/*"],
+            "js": ["src/contentScript.ts"]
+        }
+    ]
+}
