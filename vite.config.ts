@@ -3,6 +3,20 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import fs from "fs";
 
+function movePopupHtml() {
+    return {
+        name: "move-popup-html",
+        closeBundle() {
+            const srcPath = path.resolve(__dirname, "dist/src/popup.html");
+            const destPath = path.resolve(__dirname, "dist/popup.html");
+            if (fs.existsSync(srcPath)) {
+                fs.renameSync(srcPath, destPath);
+                console.log("Moved popup.html to dist root");
+            }
+        },
+    };
+}
+
 export default defineConfig({
     plugins: [
         react(),
@@ -15,6 +29,7 @@ export default defineConfig({
                 );
             },
         },
+        movePopupHtml(),
     ],
     build: {
         outDir: "dist",
@@ -26,7 +41,7 @@ export default defineConfig({
             },
             output: {
                 entryFileNames: "[name].js",
-                chunkFileNames: "[name].js",
+                chunkFileNames: "[name].[hash].js",
                 assetFileNames: "[name].[ext]",
             },
         },
