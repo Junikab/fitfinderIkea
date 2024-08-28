@@ -13,7 +13,7 @@ const Popup: React.FC = () => {
 
     return (
         <div className="popup">
-            <h1>IKEA Furniture Filter</h1>
+            <h1>FitFinder IKEA</h1>
             <input
                 type="number"
                 placeholder="Width"
