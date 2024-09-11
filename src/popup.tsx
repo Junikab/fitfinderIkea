@@ -3,10 +3,11 @@ import "./popup.css";
 
 interface Product {
     name: string;
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
     depth?: number;
-    price: number;
+    // price: number;
+    url: string;
 }
 
 const Popup: React.FC = () => {
@@ -62,8 +63,8 @@ const Popup: React.FC = () => {
 
      const filterProducts = () => {
          const filtered = products.filter((product) => {
-             const widthCheck = product.width <= dimensions.width;
-             const heightCheck = product.height <= dimensions.height;
+             const widthCheck = !product.width || product.width <= dimensions.width;
+             const heightCheck = !product.height || product.height <= dimensions.height;
              const depthCheck =
                  !product.depth || product.depth <= dimensions.depth;
              return widthCheck && heightCheck && depthCheck;
@@ -76,36 +77,51 @@ const Popup: React.FC = () => {
             <h1>FitFinder IKEA </h1>
             {error && <div className="error">{error}</div>}
             <div className="inputs">
-                <input
-                    type="number"
-                    name="width"
-                    placeholder="Max Width"
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="number"
-                    name="height"
-                    placeholder="Max Height"
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="number"
-                    name="depth"
-                    placeholder="Max Depth"
-                    onChange={handleInputChange}
-                />
+                <label>
+                    {" "}
+                    Width 
+                    <input
+                        type="number"
+                        name="width"
+                        placeholder="Max Width"
+                        onChange={handleInputChange}
+                    />
+                </label>
+                <label>Hight 
+                    <input
+                        type="number"
+                        name="height"
+                        placeholder="Max Height"
+                        onChange={handleInputChange}
+                    />
+                </label>
+                <label>Depth 
+                    <input
+                        type="number"
+                        name="depth"
+                        placeholder="Max Depth"
+                        onChange={handleInputChange}
+                    />
+                </label>
                 <button onClick={filterProducts}>Filter</button>
             </div>
+
             <div className="results">
                 {filteredProducts.map((product, index) => (
-                    <div key={index} className="product">
+                    <a
+                        key={index}
+                        className="product"
+                        href={product.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
                         <h3>{product.name}</h3>
                         <p>
                             Dimensions: {product.width}x{product.height}
                             {product.depth ? `x${product.depth}` : ""} cm
                         </p>
-                        <p>Price: ${product.price}</p>
-                    </div>
+                        {/* <p>Price: ${product.price}</p> */}
+                    </a>
                 ))}
             </div>
         </div>

@@ -1,9 +1,10 @@
 interface Product {
     name: string;
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
     depth?: number;
-    price: number;
+    // price: number;
+    url: string;
 }
 
 function extractProductData(): Product[] {
@@ -17,24 +18,30 @@ function extractProductData(): Product[] {
         const descriptionElement = element.querySelector(
             ".plp-price-module__description"
         );
-        const priceElement = element.querySelector(".plp-price-module__price"); // the price class
+        const linkElement = element.querySelector("a");
+        // const priceElement = element.querySelector(".plp-price-module__price"); // the price class
 
-        if (nameElement && descriptionElement && priceElement) {
+        if (nameElement && descriptionElement && linkElement) {
             const name = nameElement.textContent?.trim() || "";
             const description = descriptionElement.textContent?.trim() || "";
             const dimensionsMatch = description.match(
                 /(\d+)x(\d+)(?:x(\d+))?\s*cm/
             );
-            const price = parseFloat(
-                priceElement.textContent?.replace(/[^0-9.]/g, "") || "0"
-            );
+            const url = new URL(
+                linkElement.getAttribute("href") || "",
+                window.location.origin
+            ).href;
+            // const price = parseFloat(
+            //     priceElement.textContent?.replace(/[^0-9.]/g, "") || "0"
+            // );
 
             if (dimensionsMatch) {
                 const product: Product = {
                     name,
                     width: parseInt(dimensionsMatch[1]),
                     height: parseInt(dimensionsMatch[2]),
-                    price,
+                    // price,
+                    url,
                 };
 
                 if (dimensionsMatch[3]) {
@@ -59,6 +66,7 @@ chrome.runtime.onMessage.addListener(
         if (request.action === "getProducts") {
             sendResponse(extractProductData());
         }
+        return true;
     }
 );
 
