@@ -5,7 +5,7 @@
     "description": "Filter IKEA furniture by specific measurements",
     "permissions": ["activeTab", "storage"],
     "action": {
-        "default_popup": "popup.html"
+        "default_popup": "index.html"
     },
     "content_scripts": [
         {

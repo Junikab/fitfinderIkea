@@ -1,0 +1,35 @@
+.popup {
+  width: 300px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 5px;
+  font-size: 14px;
+}
+
+button {
+  padding: 10px;
+  background-color: #0051ba;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.results {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.product {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
