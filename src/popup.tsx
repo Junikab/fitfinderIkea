@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./popup.css";
+import ikeaLogo from "./ikeaLogo.png"
+
 
 interface Product {
     name: string;
@@ -74,35 +76,53 @@ const Popup: React.FC = () => {
 
     return (
         <div className="popup">
-            <h1>FitFinder IKEA </h1>
+            <div>
+                <header className="header">
+                    <a href="/ikea.com" className="logo">
+                        FitFinder
+                        <img
+                            className="imgHeader"
+                            src={ikeaLogo}
+                            alt="ikeaLogo"
+                        />
+                    </a>
+                </header>
+            </div>
             {error && <div className="error">{error}</div>}
             <div className="inputs">
-                <label>
-                    {" "}
-                    Width 
-                    <input
-                        type="number"
-                        name="width"
-                        placeholder="Max Width"
-                        onChange={handleInputChange}
-                    />
-                </label>
-                <label>Hight 
-                    <input
-                        type="number"
-                        name="height"
-                        placeholder="Max Height"
-                        onChange={handleInputChange}
-                    />
-                </label>
-                <label>Depth 
-                    <input
-                        type="number"
-                        name="depth"
-                        placeholder="Max Depth"
-                        onChange={handleInputChange}
-                    />
-                </label>
+                <div className="input-container">
+                    <label htmlFor="width">
+                        Width
+                        </label>
+                        <input
+                            type="number"
+                            name="width"
+                            placeholder="Max Width"
+                            onChange={handleInputChange}
+                        />
+                </div>
+                <div className="input-container">
+                    <label htmlFor="height">
+                        Hight
+                        </label>
+                        <input
+                            type="number"
+                            name="height"
+                            placeholder="Max Height"
+                            onChange={handleInputChange}
+                        />
+                </div>
+                <div className="input-container">
+                    <label htmlFor="depth">
+                        Depth
+                        </label>
+                        <input
+                            type="number"
+                            name="depth"
+                            placeholder="Max Depth"
+                            onChange={handleInputChange}
+                        />
+                </div>
                 <button onClick={filterProducts}>Filter</button>
             </div>
 
