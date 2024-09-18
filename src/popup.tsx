@@ -76,8 +76,8 @@ const Popup: React.FC = () => {
 
     return (
         <div className="popup">
-            <div>
-                <header className="header">
+            <div className="header">
+                <header>
                     <a href="/ikea.com" className="logo">
                         FitFinder
                         <img
@@ -91,37 +91,31 @@ const Popup: React.FC = () => {
             {error && <div className="error">{error}</div>}
             <div className="inputs">
                 <div className="input-container">
-                    <label htmlFor="width">
-                        Width
-                        </label>
-                        <input
-                            type="number"
-                            name="width"
-                            placeholder="Max Width"
-                            onChange={handleInputChange}
-                        />
+                    <label htmlFor="width">Width</label>
+                    <input
+                        type="number"
+                        name="width"
+                        placeholder="Max Width"
+                        onChange={handleInputChange}
+                    />
                 </div>
                 <div className="input-container">
-                    <label htmlFor="height">
-                        Hight
-                        </label>
-                        <input
-                            type="number"
-                            name="height"
-                            placeholder="Max Height"
-                            onChange={handleInputChange}
-                        />
+                    <label htmlFor="height">Hight</label>
+                    <input
+                        type="number"
+                        name="height"
+                        placeholder="Max Height"
+                        onChange={handleInputChange}
+                    />
                 </div>
                 <div className="input-container">
-                    <label htmlFor="depth">
-                        Depth
-                        </label>
-                        <input
-                            type="number"
-                            name="depth"
-                            placeholder="Max Depth"
-                            onChange={handleInputChange}
-                        />
+                    <label htmlFor="depth">Depth</label>
+                    <input
+                        type="number"
+                        name="depth"
+                        placeholder="Max Depth"
+                        onChange={handleInputChange}
+                    />
                 </div>
                 <button onClick={filterProducts}>Filter</button>
             </div>
