@@ -136,12 +136,14 @@ const Popup: React.FC = () => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <button className="btnFilter" onClick={filterProducts}>
-                    Filter
-                </button>
-                <button className="btnReset" onClick={resetDimensions}>
-                    Reset
-                </button>
+                <div className="btns">
+                    <button className="btnFilter" onClick={filterProducts}>
+                        Filter
+                    </button>
+                    <button className="btnReset" onClick={resetDimensions}>
+                        Reset
+                    </button>
+                </div>
             </div>
 
             <div className="results">

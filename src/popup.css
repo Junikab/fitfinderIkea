@@ -65,13 +65,21 @@ button {
   border: none;
   cursor: pointer;
   width: 100%;
-  max-width: 200px;
   margin: 0 auto 0 auto;
-  display: block;
+  
+  
+}
+.btns{
+    display:inline-flex;
+  flex-direction:row;
+  justify-content: space-between;
 }
 
 .btnFilter{
     background-color: #0051ba;
+  max-width: 130px;
+
+    
 }
 
 .btnFilter:hover{
@@ -80,6 +88,8 @@ button {
 
 .btnReset{
     background-color: #ff7272;
+  max-width: 80px;
+
 }
 .btnReset:hover{
     background-color: #fb9090;
