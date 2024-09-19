@@ -8,7 +8,6 @@ interface Product {
     width?: number;
     height?: number;
     depth?: number;
-    // price: number;
     url: string;
 }
 
@@ -23,6 +22,12 @@ const Popup: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     
     useEffect(() => {
+        // Load saved dimensions from local storage
+        const saveDimensions = localStorage.getItem("fitFinderDimensions");
+        if (saveDimensions) {
+            setDimensions(JSON.parse(saveDimensions));
+        }
+
         if (chrome?.tabs?.query) {
             chrome.tabs.query(
                 { active: true, currentWindow: true },
@@ -60,18 +65,29 @@ const Popup: React.FC = () => {
     
      const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
          const { name, value } = e.target;
-         setDimensions((prev) => ({ ...prev, [name]: parseInt(value) || 0 }));
+         const newDimensions = { ...dimensions, [name]: parseInt(value) || 0 };
+         setDimensions(newDimensions);
+         // Save dimensions to local storage
+         localStorage.setItem(
+             "fitFinderDimensions",
+             JSON.stringify(newDimensions)
+         );
      };
 
      const filterProducts = () => {
          const filtered = products.filter((product) => {
              const widthCheck = !product.width || product.width <= dimensions.width;
              const heightCheck = !product.height || product.height <= dimensions.height;
-             const depthCheck =
-                 !product.depth || product.depth <= dimensions.depth;
+             const depthCheck = !product.depth || product.depth <= dimensions.depth;
              return widthCheck && heightCheck && depthCheck;
          });
          setFilteredProducts(filtered);
+     };
+
+     const resetDimensions = () => {
+        const resetDimensions = {width: 0, height: 0, depth: 0};
+        setDimensions(resetDimensions);
+        localStorage.removeItem("fitFinderDimensions");
      };
 
     return (
@@ -96,6 +112,7 @@ const Popup: React.FC = () => {
                         type="number"
                         name="width"
                         placeholder="Max Width"
+                        value={dimensions.width || ""}
                         onChange={handleInputChange}
                     />
                 </div>
@@ -105,6 +122,7 @@ const Popup: React.FC = () => {
                         type="number"
                         name="height"
                         placeholder="Max Height"
+                        value={dimensions.height || ""}
                         onChange={handleInputChange}
                     />
                 </div>
@@ -114,10 +132,16 @@ const Popup: React.FC = () => {
                         type="number"
                         name="depth"
                         placeholder="Max Depth"
+                        value={dimensions.depth || ""}
                         onChange={handleInputChange}
                     />
                 </div>
-                <button onClick={filterProducts}>Filter</button>
+                <button className="btnFilter" onClick={filterProducts}>
+                    Filter
+                </button>
+                <button className="btnReset" onClick={resetDimensions}>
+                    Reset
+                </button>
             </div>
 
             <div className="results">
@@ -134,7 +158,6 @@ const Popup: React.FC = () => {
                             Dimensions: {product.width}x{product.height}
                             {product.depth ? `x${product.depth}` : ""} cm
                         </p>
-                        {/* <p>Price: ${product.price}</p> */}
                     </a>
                 ))}
             </div>

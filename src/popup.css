@@ -4,8 +4,6 @@
   padding: 0px;
   margin-top: 0px;
   font-family: Arial, sans-serif;
-  /* border: 1px solid #606060; */
-  border-radius: 5px;
 }
 
 .header {
@@ -63,18 +61,28 @@ input {
 
 button {
   padding: 10px;
-  background-color: #0051ba;
   color: white;
   border: none;
   cursor: pointer;
   width: 100%;
   max-width: 200px;
-  margin: 10px auto;
+  margin: 0 auto 0 auto;
   display: block;
 }
 
-button:hover{
+.btnFilter{
+    background-color: #0051ba;
+}
+
+.btnFilter:hover{
     background-color: #2d6ddc;
+}
+
+.btnReset{
+    background-color: #ff7272;
+}
+.btnReset:hover{
+    background-color: #fb9090;
 }
 
 .results {
