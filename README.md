@@ -1,50 +1,63 @@
-# React + TypeScript + Vite
+# IKEA FitFinder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+IKEA FitFinder is a Chrome extension that enhances your IKEA shopping experience by allowing you to filter furniture based on specific dimensions. This tool is perfect for those looking to find furniture that fits perfectly in their space.
 
-Currently, two official plugins are available:
+![IKEA FitFinder Logo](./ikeaLogo.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- Filter IKEA products by maximum width, height, and depth
+- User-friendly popup interface
+- Instantly highlights products that match your criteria
+- Saves your dimension preferences for future use
+- Easy reset functionality to clear filters
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Installation
 
-- Configure the top-level `parserOptions` property like this:
+1. Clone this repository or download the source code.
+2. Open Google Chrome and navigate to `chrome://extensions/`.
+3. Enable "Developer mode" in the top right corner.
+4. Click "Load unpacked" and select the directory containing the extension files.
+5. The IKEA FitFinder extension should now appear in your Chrome toolbar.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Usage
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. Navigate to any IKEA product listing page.
+2. Click on the IKEA FitFinder icon in your Chrome toolbar to open the popup.
+3. Enter your desired maximum dimensions (width, height, depth) in centimeters.
+4. Click "Filter" to apply the dimensions.
+5. Products on the page will be filtered:
+   - Matching products will remain highlighted.
+   - Non-matching products will be greyed out.
+6. To reset the filter, click "Reset" in the popup or refresh the page.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Development
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+This project is built using React and TypeScript. To set up the development environment:
+
+1. Install dependencies:
+   ```
+   npm install
+   ```
+
+2. Run the development server:
+   ```
+   npm run dev
+   ```
+
+3. Build the extension:
+   ```
+   npm run build
+   ```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## Contact
+
+Created by Junikab (2024) - [GitHub Profile](https://github.com/Junikab)
