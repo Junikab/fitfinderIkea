@@ -2,7 +2,7 @@
 
 IKEA FitFinder is a Chrome extension that enhances your IKEA shopping experience by allowing you to filter furniture based on specific dimensions. This tool is perfect for those looking to find furniture that fits perfectly in their space.
 
-![Alt text](./assets/Example.png)
+![Alt text](./images/Example.png)
 
 ## Features
 
@@ -53,10 +53,6 @@ This project is built using React and TypeScript. To set up the development envi
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
 
 ## Contact
 
