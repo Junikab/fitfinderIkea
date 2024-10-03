@@ -103,9 +103,9 @@ const Popup: React.FC = () => {
                     </a>
                 </header>
             </div>
-            
+
             {error && <div className="error">{error}</div>}
-            
+
             <div className="inputs">
                 <div className="input-container">
                     <label htmlFor="width">Width</label>
@@ -154,7 +154,7 @@ const Popup: React.FC = () => {
                 <div className="made">Made by Junikab (2024)</div>
                 <div>
                     <a
-                        href="https://github.com/Junikab"
+                        href="https://github.com/Junikab/fitfinderIkea"
                         target="_blank"
                         className="hover:opacity-70"
                     >
