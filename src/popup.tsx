@@ -30,47 +30,69 @@ const Popup: React.FC = () => {
      };
 
      const applyFilter = ()=> {
-        if(chrome?.tabs?.query){
-            chrome.tabs.query({active:true, currentWindow:true}, (tabs)=>{
-                if(tabs[0]?.id) {
-                    chrome.tabs.sendMessage(
-                        tabs[0].id,
-                        {
-                            action: "filterProducts",
-                            dimensions: dimensions,
-                        },
-                        (response) => {
-                            console.log("Response from content script",response);
-                            if(chrome.runtime.lastError){
-                                console.error("Error", chrome.runtime.lastError);
-                                setError(
-                                    "Error communicating with the page. Please refresh and try again."
-                                )
-                            }
-                        }
-                    );
-                }else { 
-                    console.error("No active tab found");
-                    setError("No active tab found");
-                }
-            });
-        }else{
-            console.error("Chrome API not available");
-            setError("Chrome API not available")
+        if(dimensions.width === 0 && dimensions.height === 0 && dimensions.depth === 0){
+            setError("You must enter at least one parameter");
+            return;
         }
+        setError(null);
+        sendMsgToContentScript("filterProducts", dimensions);
+
      }
 
      const resetDimensions = () => {
         const resetDimensions = {width: 0, height: 0, depth: 0};
         setDimensions(resetDimensions);
         localStorage.removeItem("fitFinderDimensions");
+        setError(null);
+        sendMsgToContentScript("resetFilter")
      };
+
+     const sendMsgToContentScript = (action: string, dimensions?: {width:number; height: number; depth: number})=>{
+        if (chrome?.tabs?.query) {
+            chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+                if (tabs[0]?.id) {
+                    chrome.tabs.sendMessage(
+                        tabs[0].id,
+                        {
+                            action: action,
+                            dimensions: dimensions,
+                        },
+                        (response) => {
+                            console.log(
+                                "Response from content script",
+                                response
+                            );
+                            if (chrome.runtime.lastError) {
+                                console.error(
+                                    "Error",
+                                    chrome.runtime.lastError
+                                );
+                                setError(
+                                    "Error communicating with the page. Please refresh and try again."
+                                );
+                            }
+                        }
+                    );
+                } else {
+                    console.error("No active tab found");
+                    setError("No active tab found");
+                }
+            });
+        } else {
+            console.error("Chrome API not available");
+            setError("Chrome API not available");
+        }
+     }
 
     return (
         <div className="popup">
             <div className="header">
                 <header>
-                    <a href="/ikea.com" className="logo">
+                    <a
+                        href="http://www.ikea.com"
+                        target="_blank"
+                        className="logo"
+                    >
                         FitFinder
                         <img
                             className="imgHeader"

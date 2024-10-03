@@ -53,26 +53,38 @@ function filterProducts(dimensions: {
     console.log("Filtering products with dimensions", dimensions)
     const products = extractProductData();
 
-    let hiddenCount= 0;
+    let filteredCount= 0;
     products.forEach((product) => {
         const widthCheck =
-            !dimensions.width ||
+            dimensions.width === 0 ||
             (product.width && product.width <= dimensions.width);
         const heightCheck =
-            !dimensions.height ||
+            dimensions.height === 0 ||
             (product.height && product.height <= dimensions.height);
         const depthCheck =
-            !dimensions.depth ||
+            dimensions.depth === 0 ||
             (product.depth && product.depth <= dimensions.depth);
 
         if (widthCheck && heightCheck && depthCheck) {
-            (product.element as HTMLElement).style.display = "";
+            (product.element as HTMLElement).style.opacity = "1";
+            (product.element as HTMLElement).style.filter = "none";
+            (product.element as HTMLElement).style.border = "none";
         } else {
-            (product.element as HTMLElement).style.display = "none";
-            hiddenCount++;
+            (product.element as HTMLElement).style.opacity = "0.2";
+            (product.element as HTMLElement).style.filter = "grayscale(100%)";
+            (product.element as HTMLElement).style.border = "solid 1px";
+            filteredCount++;
         }
     });
-    console.log(`Filtering products. Hidden: ${hiddenCount}, Visible: ${products.length - hiddenCount}`);
+    console.log(`Filtering complete. Filtered: ${filteredCount}, Visible: ${products.length - filteredCount}`);
+}
+
+function resetFilter(){
+    const products = extractProductData();
+    products.forEach((product)=>{
+        (product.element as HTMLElement).style.opacity = "1";
+        (product.element as HTMLElement).style.filter = "none";
+    })
 }
 // Send data to popup when requested
 chrome.runtime.onMessage.addListener(
@@ -85,8 +97,13 @@ chrome.runtime.onMessage.addListener(
         if (request.action === "filterProducts") {
             console.log("Filtering with dimensions:", request.dimensions);
             filterProducts(request.dimensions);
+            sendResponse({success: true});
+        } else if (request.action === "resetFilter"){
+            console.log ("Resetting Filter")
+            resetFilter();
             sendResponse({ success: true });
         }
+
         return true;
     }
 );
