@@ -103,6 +103,18 @@ button {
     background-color: #fb9090;
 }
 
+.footer{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+    opacity: 50%;
+    padding-bottom: 10px;
+}
+.made {
+    font-size: small;
+}
+
 
 /* In case of displaying items in the popup */
 

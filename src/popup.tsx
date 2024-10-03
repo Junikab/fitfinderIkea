@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { GithubIcon} from "lucide-react";
 import "./popup.css";
 import ikeaLogo from "./ikeaLogo.png"
 
@@ -102,7 +103,9 @@ const Popup: React.FC = () => {
                     </a>
                 </header>
             </div>
+            
             {error && <div className="error">{error}</div>}
+            
             <div className="inputs">
                 <div className="input-container">
                     <label htmlFor="width">Width</label>
@@ -144,6 +147,19 @@ const Popup: React.FC = () => {
                     <button className="btnReset" onClick={resetDimensions}>
                         Reset
                     </button>
+                </div>
+            </div>
+
+            <div className="footer">
+                <div className="made">Made by Junikab (2024)</div>
+                <div>
+                    <a
+                        href="https://github.com/Junikab"
+                        target="_blank"
+                        className="hover:opacity-70"
+                    >
+                        <GithubIcon className="size-4" />
+                    </a>
                 </div>
             </div>
         </div>
